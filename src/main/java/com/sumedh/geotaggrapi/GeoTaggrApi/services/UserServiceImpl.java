@@ -1,5 +1,6 @@
 package com.sumedh.geotaggrapi.GeoTaggrApi.services;
 
+import com.sumedh.geotaggrapi.GeoTaggrApi.Constants;
 import com.sumedh.geotaggrapi.GeoTaggrApi.domain.User;
 import com.sumedh.geotaggrapi.GeoTaggrApi.repositories.UserRepository;
 import io.jsonwebtoken.Jwts;
@@ -14,7 +15,6 @@ import java.util.Date;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
-
 
     @Autowired
     UserRepository userRepository;
@@ -38,10 +38,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String generateUserJWT(User user) {
-        System.out.println(secretKey);
+        long tokenCreationDate = System.currentTimeMillis();
 
         String token = Jwts.builder()
                 .signWith(SignatureAlgorithm.HS256, secretKey)
+                .setIssuedAt(new Date(tokenCreationDate))
+                .setExpiration(new Date(tokenCreationDate + Constants.TOKEN_EXPIRATION_TIME))
                 .claim("userId", user.getUserId())
                 .claim("name", user.getName())
                 .claim("facebookId", user.getFacebookId())
