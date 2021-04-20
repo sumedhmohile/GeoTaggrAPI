@@ -23,22 +23,22 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public void updateTag(Integer tagId, String tagText) {
-
+    public void updateTag(Integer tagId, String tagText, String setById) {
+        tagRepository.updateTag(tagId, tagText, setById);
     }
 
     @Override
-    public void delete(Integer tagId) {
-
+    public void delete(Integer tagId, String setById) {
+        tagRepository.delete(tagId, setById);
     }
 
     @Override
     public List<Tag> getAllTagsSetForUser(String setForId) {
-        return null;
+        return tagRepository.getAllTagsSetForUser(setForId);
     }
 
     @Override
     public List<Tag> getAllTagsSetByUserForOthers(String setById) {
-        return null;
+        return tagRepository.getAllTagsSetByUserForOthers(setById);
     }
 }
