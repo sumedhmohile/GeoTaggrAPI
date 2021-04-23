@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,6 +30,20 @@ public class UserResource {
 
         Map<String, String> userDataMap = new HashMap<>();
         userDataMap.put("token", token);
+
+        return new ResponseEntity<>(userDataMap, HttpStatus.OK);
+    }
+
+    @PostMapping("/fcm")
+    public ResponseEntity<Map<String, Boolean>> updateFCMToken(HttpServletRequest request, @RequestBody Map<String, Object> requestMap) {
+        String facebookId = (String) request.getAttribute("userId");
+        String fcmToken = (String) requestMap.get("fcmToken");
+
+
+        userService.updateFCMTokenForUser(facebookId, fcmToken);
+        Map<String, Boolean> userDataMap = new HashMap<>();
+
+        userDataMap.put("status", true);
 
         return new ResponseEntity<>(userDataMap, HttpStatus.OK);
     }

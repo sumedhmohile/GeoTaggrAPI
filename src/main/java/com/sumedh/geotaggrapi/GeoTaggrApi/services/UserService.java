@@ -6,4 +6,6 @@ public interface UserService {
     User loginUser(String name, String facebookId, String fcmToken);
 
     String generateUserJWT(User user);
+
+    void updateFCMTokenForUser(String facebookId, String fcmToken);
 }

@@ -52,4 +52,9 @@ public class UserServiceImpl implements UserService {
 
         return token;
     }
+
+    @Override
+    public void updateFCMTokenForUser(String facebookId, String fcmToken) {
+        userRepository.updateFCMTokenForUser(facebookId, fcmToken);
+    }
 }
