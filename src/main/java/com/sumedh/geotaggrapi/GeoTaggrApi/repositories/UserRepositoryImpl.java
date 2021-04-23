@@ -19,6 +19,7 @@ public class UserRepositoryImpl implements UserRepository{
     private static final String SQL_GET_USER_BY_ID = "SELECT USER_ID, NAME, FB_ID, FCM_TOKEN FROM GT_USERS WHERE USER_ID=?";
     private static final String SQL_GET_USER_COUNT_BY_FB_ID = "SELECT COUNT(*) FROM GT_USERS WHERE FB_ID=?";
     private static final String SQL_GET_USER_BY_FB_ID = "SELECT USER_ID, NAME, FB_ID, FCM_TOKEN FROM GT_USERS WHERE FB_ID=?";
+    private static final String SQL_UPDATE_FCMTOKEN_FOR_USER = "UPDATE GT_USERS SET FCM_TOKEN=? WHERE FB_ID=?";
 
     @Autowired
     JdbcTemplate jdbcTemplate;
@@ -61,5 +62,10 @@ public class UserRepositoryImpl implements UserRepository{
     @Override
     public User getUserByFacebookId(String facebookId) {
         return jdbcTemplate.queryForObject(SQL_GET_USER_BY_FB_ID, userRowMapper, facebookId);
+    }
+
+    @Override
+    public void updateFCMTokenForUser(String facebookId, String fcmToken) {
+        jdbcTemplate.update(SQL_UPDATE_FCMTOKEN_FOR_USER, fcmToken, facebookId);
     }
 }
