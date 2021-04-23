@@ -10,4 +10,6 @@ public interface UserRepository {
     User getUserById(Integer userId);
 
     User getUserByFacebookId(String facebookId);
+
+    void updateFCMTokenForUser(String facebookId, String fcmToken);
 }
