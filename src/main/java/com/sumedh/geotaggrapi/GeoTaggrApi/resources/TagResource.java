@@ -26,12 +26,10 @@ public class TagResource {
     @PostMapping("")
     public ResponseEntity<Tag> createTag(HttpServletRequest request, @RequestBody Map<String, Object> tagMap) {
         String setById = (String) request.getAttribute("userId");
-        System.out.println("FROM REQUEST: " + setById);
         String tagText = (String) tagMap.get("tagText");
         String setForId = (String) tagMap.get("setForId");
         Double latitude = (Double) tagMap.get("latitude");
         Double longitude = (Double) tagMap.get("longitude");
-
 
         Tag createdTag;
         try {
@@ -40,7 +38,6 @@ public class TagResource {
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
         }
-
 
         return new ResponseEntity<>(createdTag, HttpStatus.CREATED);
     }
