@@ -1,4 +1,4 @@
-#GeoTaggrAPI
+# GeoTaggrAPI
 
 GeoTaggrAPI is a REST API backend for the GeoTaggr Android App.
 <br><br>
